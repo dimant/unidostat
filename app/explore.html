@@ -1,0 +1,40 @@
+<h1> Explore! </h1>
+
+<div ng-show="eType == 'countries'">
+<select style="width:200px" ng-model="industry">
+	<option value="United States">United States</option>
+	<option value="United Kingdom">United Kingdom</option>
+	<option value="Afghanistan">Afghanistan</option>
+	<option value="Aland Islands">Aland Islands</option>
+	<option value="Albania">Albania</option>
+	<option value="Algeria">Algeria</option>
+</select>
+</div>
+
+<div ng-show="eType == 'industries'">
+<select style="width:200px" ng-model="country">
+	<option value="United States">United States</option>
+	<option value="United Kingdom">United Kingdom</option>
+	<option value="Afghanistan">Afghanistan</option>
+	<option value="Aland Islands">Aland Islands</option>
+	<option value="Albania">Albania</option>
+	<option value="Algeria">Algeria</option>
+</select>
+</div>
+<div>
+<select ng-model="fromYear">
+	<option value="0">1969</option>
+	<option value="1">1970</option>
+	<option value="2">1971</option>
+	<option value="3">1972</option>
+</select>
+
+<select ng-model="toYear">
+	<option value="0">1969</option>
+	<option value="1">1970</option>
+	<option value="2">1971</option>
+	<option value="3">1972</option>
+</select>
+</div>
+
+<button class="btn btn-default" ng-click="back()">Home</button>

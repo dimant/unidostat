@@ -1,0 +1,48 @@
+.btn-default {
+	margin-left:4px;
+}
+
+header {
+	background:#4b92db;
+	color:white;	
+}
+
+header a:link {
+	color:white
+}
+header a:visited {
+	color:white
+}
+header a:hover {
+	color:white
+}
+header a:active {
+	color:white
+}
+
+footer {
+	background:#4b92db;
+	color:white;	
+	position: fixed;
+    bottom:0;	
+	width: 100%;
+}
+
+footer a:link {
+	color:white
+}
+footer a:visited {
+	color:white
+}
+footer a:hover {
+	color:white
+}
+footer a:active {
+	color:white
+}
+
+.icon {
+	width:20px;
+	margin-right:7px;
+	margin-top:-4px;
+}

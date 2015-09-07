@@ -1,0 +1,49 @@
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <div role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <h4 class="panel-title">
+          <a class="collapsed">
+            <img src="visuals/world10.svg" class="icon" />Countries
+          </a>
+        </h4>
+      </div>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <select width="'350px'" chosen multiple data-placeholder="Select Countries" ng-model="countries">
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Aland Islands">Aland Islands</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+        </select><button class="btn btn-default" ng-click="explore('countries')">Explore</button>
+      </div>
+    </div>
+  </div>
+    <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <div role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwoe" aria-expanded="false" aria-controls="collapseTwoe">
+        <h4 class="panel-title">
+          <a class="collapsed">
+            <img src="visuals/factory6.svg" class="icon" />Industries
+          </a>
+        </h4>
+      </div>
+    </div>
+    <div id="collapseTwoe" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoe">
+      <div class="panel-body">
+        <select width="'350px'" chosen multiple data-placeholder="Select Industries" ng-model="industries">
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Aland Islands">Aland Islands</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+        </select><button class="btn btn-default" ng-click="explore('industries')">Explore</button>
+      </div>
+    </div>
+  </div>
+</div>

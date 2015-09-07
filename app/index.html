@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html ng-app="unidostat">
+	<head>
+		<!-- jquery -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+
+		<!-- chosen -->
+		<script src="bower_components/chosen/chosen.jquery.min.js"></script>
+		<link rel="stylesheet" href="bower_components/chosen/chosen.min.css">
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
+		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap-them.css">
+		<script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- angular -->
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		
+		<!-- angular chosen -->
+		<script src="bower_components/angular-chosen/angular-chosen.js"></script>
+		<link rel="stylesheet" href="bower_components/angular-chosen/chosen-spinner.css">
+		
+		<!-- my stuff -->
+		<link rel="stylesheet" href="styles/main.css" />
+		<script src="scripts/app.js"></script>
+		<script src="scripts/MainController.js"></script>
+		<script src="scripts/AttributionsController.js"></script>
+		<script src="scripts/FooterController.js"></script>	
+		<script src="scripts/ExploreController.js"></script>	
+	</head>
+
+	<body> 
+		<header style="overflow:auto">
+			<a href="#/main" onmouseup="blur(this)">
+			<img src="visuals/Flag_of_UNIDO-transparent.svg" 
+				style="float:left;margin-left:-55px;margin-right:-60px;margin-top:-25px;margin-bottom:-25px;" width="250px"/>
+			<span><h3 style="margin-top:30px;font-variant:small-caps">United Nations<br/>Industrial Development Organization</h3></span></a>
+		</header>
+		<div ng-view></div>
+		<footer ng-controller="FooterController">
+			<a href="#/attributions" onmouseup="blur(this)" title="attributions">attributions</a>
+		</footer>
+	</body>
+</html>

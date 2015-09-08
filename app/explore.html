@@ -22,18 +22,17 @@
 </select>
 </div>
 <div>
-<select ng-model="fromYear">
-	<option value="0">1969</option>
-	<option value="1">1970</option>
-	<option value="2">1971</option>
-	<option value="3">1972</option>
+<select 
+	width="'100px'"
+	chosen 
+	ng-model="fromYear" 
+	ng-options="y for y in years">
 </select>
-
-<select ng-model="toYear">
-	<option value="0">1969</option>
-	<option value="1">1970</option>
-	<option value="2">1971</option>
-	<option value="3">1972</option>
+<select 
+	width="'100px'"
+	chosen 
+	ng-model="toYear" 
+	ng-options="y for y in years">
 </select>
 </div>
 

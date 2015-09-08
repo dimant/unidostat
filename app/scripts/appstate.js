@@ -32,13 +32,13 @@
           propertyChanged('credentials', oldValue, newValue);
         };
         
-        var getDataSet = function() {
-            return _state.dataset;
-        };
-        var setDataSet = function(dataset) {
-            var oldValue = _state.dataset;
-            _state.dataset = dataset;
-            propertyChanged('dataset', oldValue, dataset);
+        var getDbInfo = function() {
+            return _state.dbinfo;
+        }
+        var setDbInfo = function(dbinfo) {
+            var oldValue = _state.dbinfo;
+            _state.dbinfo = dbinfo;
+            propertyChanged('dbinfo', oldValue, dbinfo);
         }
         
         var getCountries = function() {
@@ -85,8 +85,8 @@
             listenForProperty:listenForProperty,
             getCredentials:getCredentials,
             setCredentials:setCredentials,
-            getDataset:getDataSet,
-            setDataSet:setDataSet,
+            getDbInfo:getDbInfo,
+            setDbInfo:setDbInfo,
             getCountries:getCountries,
             setCountries:setCountries,
             getVariables:getVariables,

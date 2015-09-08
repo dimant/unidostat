@@ -48,7 +48,8 @@
             chosen multiple 
             data-placeholder="Select Industries" 
             no-results-text="'No Industries in data set.'"
-            ng-model="selectedIndustries" ng-options="i.code + ' ' + i.name for i in availableIndustries">
+            ng-model="selectedIndustries" 
+            ng-options="i.code + ' ' + i.name for i in availableIndustries">
         </select><button class="btn btn-default" ng-click="explore('industries')">Explore</button>
       </div>
     </div>

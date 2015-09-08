@@ -37,7 +37,7 @@
                 });
         });
 
-        var createDataQuery = function(db, countries, variable, start, end, industries) {
+        var createDataQuery = function(db, country, variable, start, end, industries) {
             var uriJoin = function(arr) {
               var str = [];
               for(var o in arr) {
@@ -48,7 +48,7 @@
 
             var query = 
                 "db=" + encodeURIComponent(db) + 
-                "&cc=" + encodeURIComponent(countries) +
+                "&cc=" + encodeURIComponent(country) +
                 "&variable=" + encodeURIComponent(variable) +
                 "&start=" + encodeURIComponent(start) + 
                 "&end=" + encodeURIComponent(end) +
@@ -58,7 +58,6 @@
         };
 
         var _dbData = _.memoize(function(query) {
-            console.log(query);
             return $http({
                     method: 'POST',
                     url: url + "/dbdata",
@@ -74,8 +73,8 @@
                 });        
         });
         
-        var dbData = function (db, countries, variable, start, end, industries) {
-            var query = createDataQuery(db, countries, variable, start, end, industries);
+        var dbData = function (db, country, variable, start, end, industries) {
+            var query = createDataQuery(db, country, variable, start, end, industries);
             return _dbData(query);
         };
 

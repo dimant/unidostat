@@ -2,7 +2,7 @@
 
     var app = angular.module("unidostat");
 
-    var MainController = function($scope, $location, $log, unidostat) {   
+    var MainController = function($scope, $location, $log, unidostat, appstate) {   
         
         var onDbList = function(db) {
             $scope.availableData = db;
@@ -13,6 +13,8 @@
         }     
                 
         var onDbInfo = function(db) {
+            appstate.setDbInfo(db);
+            
             $scope.availableIndustries = db.isics;
             $("#industries").trigger("chosen:updated");
             
@@ -30,15 +32,14 @@
 
         var activate = function() {
             unidostat.setCredentials("diman.todorov@outlook.com", "r0llerball");
-            unidostat.dbList().then(onDbList, onError);
-            unidostat.dbData("INDSTAT 2 2015, ISIC Revision 3", 100, "04", 2008, 2009, [15]).then(function(d){
-                $log.info(d);
-            });      
+            unidostat.dbList().then(onDbList, onError);    
         };        
         
         activate();
         
         $scope.explore = function(eType) {
+            appstate.setCountries($scope.selectedCountries);
+            appstate.setIndustries($scope.selectedIndustries);
             $location.path("/explore/"+eType+"/"+$scope.selectedData.name);
         }
         

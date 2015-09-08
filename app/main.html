@@ -28,6 +28,7 @@
             no-results-text="'No Countries in data set.'"
             ng-model="selectedCountries" 
             ng-options="c.name for c in availableCountries">
+            <option></option>
         </select><button class="btn btn-default" ng-click="explore('countries')">Explore</button>
       </div>
     </div>
@@ -50,6 +51,7 @@
             no-results-text="'No Industries in data set.'"
             ng-model="selectedIndustries" 
             ng-options="i.code + ' ' + i.name for i in availableIndustries">
+            <option></option>
         </select><button class="btn btn-default" ng-click="explore('industries')">Explore</button>
       </div>
     </div>

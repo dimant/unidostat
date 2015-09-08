@@ -1,39 +1,45 @@
-<h1> Explore! </h1>
-
+<div>
 <div ng-show="eType == 'countries'">
-<select style="width:200px" ng-model="industry">
-	<option value="United States">United States</option>
-	<option value="United Kingdom">United Kingdom</option>
-	<option value="Afghanistan">Afghanistan</option>
-	<option value="Aland Islands">Aland Islands</option>
-	<option value="Albania">Albania</option>
-	<option value="Algeria">Algeria</option>
+<select width="'350px'" 
+	chosen 
+	data-placeholder="Select Industry" 
+	no-results-text="'No Industries in data set.'"
+	ng-model="selectedIndustry" 
+	ng-options="i.code + ' ' + i.name for i in availableIndustries"
+	ng-change="updateGraph()">
 </select>
 </div>
 
 <div ng-show="eType == 'industries'">
-<select style="width:200px" ng-model="country">
-	<option value="United States">United States</option>
-	<option value="United Kingdom">United Kingdom</option>
-	<option value="Afghanistan">Afghanistan</option>
-	<option value="Aland Islands">Aland Islands</option>
-	<option value="Albania">Albania</option>
-	<option value="Algeria">Algeria</option>
+<select width="'350px'" 
+	chosen 
+	data-placeholder="Select Country" 
+	no-results-text="'No Countries in data set.'"
+	ng-model="selectedCountry" 
+	ng-options="c.name for c in availableCountries"
+	ng-change="updateGraph()">
+	<option></option>
 </select>
 </div>
-<div>
+
 <select 
 	width="'100px'"
 	chosen 
 	ng-model="fromYear" 
-	ng-options="y for y in years">
+	ng-options="y for y in years"
+	ng-change="updateGraph()">
+	<option></option>
 </select>
 <select 
 	width="'100px'"
 	chosen 
 	ng-model="toYear" 
-	ng-options="y for y in years">
+	ng-options="y for y in years"
+	ng-change="updateGraph()">
 </select>
 </div>
+<canvas id="line" class="chart chart-line" chart-data="data"
+  chart-labels="labels" chart-legend="true" chart-series="series" >
+</canvas> 
 
 <button class="btn btn-default" ng-click="back()">Home</button>

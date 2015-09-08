@@ -14,9 +14,10 @@
   ],
   "dependencies": {
     "angular-chart.js": "~0.8.2",
-    "angular-chosen": "*",
+    "angular-chosen-localytics": "~1.0.7",
     "angular-route": "~1.4.5",
     "bootstrap-css": "~3.3.4",
-    "chosen": "~1.4.2"
+    "chosen": "~1.4.2",
+    "underscore": "~1.8.3"
   }
 }

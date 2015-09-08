@@ -1,6 +1,6 @@
 (function(){
     
-    var app = angular.module("unidostat", ["ngRoute", "angular-chosen"]);
+    var app = angular.module("unidostat", ["ngRoute", "localytics.directives"]);
 
     app.config(function($routeProvider){
         $routeProvider
@@ -12,7 +12,7 @@
                 templateUrl: "attributions.html",
                 controller: "AttributionsController"
             })
-            .when("/explore/:eType", {
+            .when("/explore/:eType/:data", {
                 templateUrl: "explore.html",
                 controller: "ExploreController"
             })

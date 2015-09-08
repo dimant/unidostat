@@ -22,24 +22,62 @@
         }
 
         var dbList = _.memoize(function () {
-            return $http.get(url + "/dblist", getConfig()).then(function (response) {
-                return response.data.dblist;
-            });
+            return $http
+                .get(url + "/dblist", getConfig())
+                .then(function (response) {
+                    return response.data.dblist;
+                });
         });
 
         var dbInfo = _.memoize(function (dbName) {
-            if(isCredentialsSet) {
-                return $http.get(url + "/dbinfo/" + dbName, getConfig()).then(function(response) {
+            return $http
+                .get(url + "/dbinfo/" + dbName, getConfig())
+                .then(function(response) {
                     return response.data.db;
                 });
-            } else {
-                return null;                
-            }
         });
 
-        var dbData = _.memoize(function () {
-            return null;
+        var createDataQuery = function(db, countries, variable, start, end, industries) {
+            var uriJoin = function(arr) {
+              var str = [];
+              for(var o in arr) {
+                  str.push(encodeURIComponent(arr[o]));
+              }
+              return str.join(',');
+            };
+
+            var query = 
+                "db=" + encodeURIComponent(db) + 
+                "&cc=" + encodeURIComponent(countries) +
+                "&variable=" + encodeURIComponent(variable) +
+                "&start=" + encodeURIComponent(start) + 
+                "&end=" + encodeURIComponent(end) +
+                "&isic=" + uriJoin(industries);
+            
+            return query;
+        };
+
+        var _dbData = _.memoize(function(query) {
+            console.log(query);
+            return $http({
+                    method: 'POST',
+                    url: url + "/dbdata",
+                    data: query,
+                    headers: {
+                        'username': username,
+                        'password': password,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                .then(function(response) {
+                    return response.data;
+                });        
         });
+        
+        var dbData = function (db, countries, variable, start, end, industries) {
+            var query = createDataQuery(db, countries, variable, start, end, industries);
+            return _dbData(query);
+        };
 
         var dbMetaData = _.memoize(function () {
             return null;

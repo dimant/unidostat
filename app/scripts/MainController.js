@@ -27,10 +27,13 @@
         var selectedDataChanged = function() {
             unidostat.dbInfo($scope.selectedData.name).then(onDbInfo, onError);
         }
-        
+
         var activate = function() {
             unidostat.setCredentials("diman.todorov@outlook.com", "r0llerball");
             unidostat.dbList().then(onDbList, onError);
+            unidostat.dbData("INDSTAT 2 2015, ISIC Revision 3", 100, "04", 2008, 2009, [15]).then(function(d){
+                $log.info(d);
+            });      
         };        
         
         activate();

@@ -13,5 +13,8 @@
     "gulp": "^3.9.0",
     "gulp-google-cdn": "^2.0.0",
     "jspm": "^0.16.2"
+  },
+  "dependencies": {
+    "cors-anywhere": "^0.2.5"
   }
 }

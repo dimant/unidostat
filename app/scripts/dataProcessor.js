@@ -19,13 +19,22 @@
 			};
 			
 			var getData = function() {
+				var years = getLabels();
 				var result = [];
 				
 				_.each(byCountry, function(d, c) {
+					var byYear = {};
 					
+					_.each(d.data, function(e) {
+						byYear[e.year] = parseInt(e.value);
+					});
+					
+					result.push(_.map(years, function(y) {
+						return byYear[y];
+					}));
 				});
 				
-				return [];
+				return result;
 			};
 			
 			var getSeries = function() {

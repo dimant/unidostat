@@ -45,32 +45,38 @@ describe('dataProcessor service tests', function () {
                 ]
             }
         };
+        var country1 = {
+            data: [
+                { country: '01', year: 1963, value: 1 },
+                { country: '01', year: 1964, value: 2 }
+            ]
+        };
+
+        var country2 = {
+            data: [
+                { country: '02', year: 1964, value: 1 },
+                { country: '02', year: 1965, value: 2 }
+            ]
+        };
 
         beforeEach(function () {
             dP = dataProcessor.newDataProcessor(dbInfo);
         });
-        
-        describe('year lists', function() {
-           it('should return all years as labels', function() {
-               expect(dP.getLabels()).toEqual([1963, 1964, 1965]);
-           }); 
+
+        describe('year lists', function () {
+            it('should return all years as labels', function () {
+                expect(dP.getLabels()).toEqual([1963, 1964, 1965]);
+            });
+
+            it('should pad missing years with "undefined" values', function () {
+                dP.addRawData(country1);
+                dP.addRawData(country2);
+
+                expect(dP.getData()).toEqual([[1, 2, undefined], [undefined, 1, 2]]);
+            });
         });
 
         describe('country lists', function () {
-            var country1 = {
-                data: [
-                    { country: '01' },
-                    { country: '01' }
-                ]
-            };
-
-            var country2 = {
-                data: [
-                    { country: '02' },
-                    { country: '02' }
-                ]
-            };
-
             it('should convert code to country', function () {
                 expect(dP.codeToCountry('01')).toEqual('A');
             });

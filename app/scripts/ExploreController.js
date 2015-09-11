@@ -5,54 +5,68 @@
     var ExploreController = function($scope, $location, $routeParams, $log, 
         unidostat, appstate, appdefaults, dataProcessor) {
         $scope.eType = $routeParams.eType;
-        var db;
+        var dbInfo;
+        var dP;
         
-        var activateCountries = function() {
-            $scope.series = [];
-            $scope.data = [];
-            var countries = appstate.getCountries();
-            var i;
-            for(i = 0; i < countries.length; i++ ) {
-                $scope.series.push(countries[i].name);
+        var waiting = 0;
+        
+        var getData = function(country, industry, variable) {
                 unidostat.dbData(
-                    db.name, 
-                    countries[i].code, 
-                    "D", 
+                    dbInfo.name, 
+                    country.code, 
+                    variable, 
                     $scope.fromYear, 
                     $scope.toYear, 
-                    [$scope.selectedIndustry.code])
+                    industry.code)
                     .then(function(d) {
-                        $scope.data.push(collectValues(d));
-                    });
-            }
+                        dP.addRawData(d);
+                        waiting = waiting - 1;
+                        if(waiting == 0) {
+                            updateGraph();
+                        }
+                    });            
+        }
+        
+        var activateCountries = function() {
+            dP = dataProcessor.newDataProcessor(dbInfo, 'country');
+            var countries = appstate.getCountries();
+            waiting = countries.length;
+            
+            _.each(countries, function(c) {
+                getData(c, $scope.selectedIndustry, $scope.selectedVariable);
+            });
         };
         
         var activateIndustries = function() {
+            dP = dataProcessor.newDataProcessor(dbInfo, 'industry');
+            var industries = appstate.getIndustries();
+            waiting = industries.length;
             
+            _.each(industries, function(c) {
+                getData(c, $scope.selectedIndustry, $scope.selectedVariable);
+            });            
         };
         
         var updateGraph = function() {                       
-            $scope.labels = collectLabels($scope.fromYear, $scope.toYear); 
+            $scope.labels = dP.getLabels();
+            $scope.data = dP.getData(); 
+            $scope.series = dP.getSeries();
+        }
+
+        var activate = function() {
+            dbInfo = appstate.getDbInfo();
+
+            $scope.fromYear = $scope.years[0];
+            $scope.toYear = $scope.years[$scope.years.length - 1];            
+
+            $scope.selectedIndustry = $scope.availableIndustries[$scope.availableIndustries.length-1];            
+            $scope.selectedCountry = $scope.availableCountries[0];
+            $scope.selectedVariable = "D";
             
             if($scope.eType == 'industries')
                 activateIndustries();
             else if($scope.eType == 'countries')
                 activateCountries();
-        }
-
-        var activate = function() {
-            db = appstate.getDbInfo();
-
-            $scope.years = collectYears(db.periods).sort(function(a,b){return a - b});
-            $scope.fromYear = $scope.years[0];
-            $scope.toYear = $scope.years[$scope.years.length - 1];
-            
-            $scope.availableIndustries = db.isics;
-            $scope.selectedIndustry = $scope.availableIndustries[$scope.availableIndustries.length-1];
-            
-            $scope.availableCountries = db.countries;
-            $scope.selectedCountry = $scope.availableCountries[0];
-            updateGraph();
         }
 
         $scope.updateGraph = updateGraph;

@@ -42,43 +42,54 @@ describe('dataProcessor service tests', function () {
                     { year: 1963 },
                     { year: 1964 },
                     { year: 1965 }
+                ],
+                isics: [
+                    { code: '20', name: 'AI' },
+                    { code: '21', name: 'BI' }
                 ]
             }
         };
+
         var country1 = {
             data: [
-                { country: '01', year: 1963, value: 1 },
-                { country: '01', year: 1964, value: 2 }
+                { country: '01', year: 1963, value: 1, isic: '20' },
+                { country: '01', year: 1964, value: 2, isic: '20' }
+            ]
+        };
+
+        var country1a = {
+            data: [
+                { country: '01', year: 1964, value: 1, isic: '21' },
+                { country: '01', year: 1965, value: 2, isic: '21' }
             ]
         };
 
         var country2 = {
             data: [
-                { country: '02', year: 1964, value: 1 },
-                { country: '02', year: 1965, value: 2 }
+                { country: '02', year: 1964, value: 1, isic: '20' },
+                { country: '02', year: 1965, value: 2, isic: '20' }
             ]
         };
-
-        beforeEach(function () {
+        
+        it('should return all years as labels', function () {
             dP = dataProcessor.newDataProcessor(dbInfo);
+            expect(dP.getLabels()).toEqual([1963, 1964, 1965]);
         });
 
-        describe('year lists', function () {
-            it('should return all years as labels', function () {
-                expect(dP.getLabels()).toEqual([1963, 1964, 1965]);
+        describe('country lists', function () {
+            beforeEach(function () {
+                dP = dataProcessor.newDataProcessor(dbInfo, 'country');
             });
 
+            it('should convert code to country', function () {
+                expect(dP.codeToCountry('01')).toEqual('A');
+            });
+            
             it('should pad missing years with "undefined" values', function () {
                 dP.addRawData(country1);
                 dP.addRawData(country2);
 
                 expect(dP.getData()).toEqual([[1, 2, undefined], [undefined, 1, 2]]);
-            });
-        });
-
-        describe('country lists', function () {
-            it('should convert code to country', function () {
-                expect(dP.codeToCountry('01')).toEqual('A');
             });
 
             it('should contain a country string for each data that has entries', function () {
@@ -87,6 +98,31 @@ describe('dataProcessor service tests', function () {
                 dP.addRawData({ data: [] });
 
                 expect(dP.getSeries()).toEqual(['A', 'B']);
+            });
+        });
+
+        describe('industry lists', function () {
+            beforeEach(function () {
+                dP = dataProcessor.newDataProcessor(dbInfo, 'isic');
+            });
+
+            it('should convert code to ISIC', function () {
+                expect(dP.codeToISIC('20')).toEqual('AI');
+            });
+            
+            it('should pad missing years with "undefined" values', function () {
+                dP.addRawData(country1);
+                dP.addRawData(country1a);
+
+                expect(dP.getData()).toEqual([[1, 2, undefined], [undefined, 1, 2]]);
+            });
+
+            it('should contain a country string for each data that has entries', function () {
+                dP.addRawData(country1);
+                dP.addRawData(country1a);
+                dP.addRawData({ data: [] });
+
+                expect(dP.getSeries()).toEqual(['AI', 'BI']);
             });
 
         });

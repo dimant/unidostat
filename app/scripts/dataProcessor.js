@@ -1,20 +1,35 @@
 (function () {
     var dataProcessor = function () {
 		
-		var newDataProcessor = function(_dbInfo) {
+		var newDataProcessor = function(_dbInfo, _groupBy) {
 			var dbInfo = _dbInfo;
-			var byCountry = {};
+			var groupBy = _groupBy;
+			var grouped = {};
+			var decoders = {};
 			
-			var codeToCountry = function(code) {
-				var country = _.find(dbInfo.db.countries, function(c) {
+			var codeToName = function(collection, code) {
+				var result = _.find(collection, function(c) {
 					return c.code == code;
 				});
-				return country.name;
+				return result.name;				
 			}
+			
+			var codeToCountry = function(code) {
+				return codeToName(dbInfo.db.countries, code);
+			}
+			
+			var codeToISIC = function(code) {
+				return codeToName(dbInfo.db.isics, code);
+			}
+			
+			decoders = {
+				country:codeToCountry,
+				isic:codeToISIC
+			};
 			
 			var addRawData = function(raw) {
 				if(raw.data.length > 0) {
-					byCountry[codeToCountry(raw.data[0].country)] = raw;
+					grouped[raw.data[0][groupBy]] = raw;
 				}
 			};
 			
@@ -22,15 +37,15 @@
 				var years = getLabels();
 				var result = [];
 				
-				_.each(byCountry, function(d, c) {
-					var byYear = {};
+				_.each(grouped, function(d, c) {
+					var flatGrouped = {};
 					
 					_.each(d.data, function(e) {
-						byYear[e.year] = parseInt(e.value);
+						flatGrouped[e.year] = parseInt(e.value);
 					});
 					
 					result.push(_.map(years, function(y) {
-						return byYear[y];
+						return flatGrouped[y];
 					}));
 				});
 				
@@ -38,7 +53,7 @@
 			};
 			
 			var getSeries = function() {
-				return _.keys(byCountry);
+				return _.map(_.keys(grouped), decoders[groupBy]);
 			};
 			
 			var getLabels = function() {
@@ -47,6 +62,7 @@
 			
 			return {
 				codeToCountry:codeToCountry,
+				codeToISIC:codeToISIC,
 				addRawData:addRawData,
 				getData:getData,
 				getSeries:getSeries,

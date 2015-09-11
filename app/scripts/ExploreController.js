@@ -2,38 +2,10 @@
 
     var app = angular.module("unidostat");
 
-    var ExploreController = function($scope, $location, $routeParams, $log, unidostat, appstate, appdefaults) {
+    var ExploreController = function($scope, $location, $routeParams, $log, 
+        unidostat, appstate, appdefaults, dataProcessor) {
         $scope.eType = $routeParams.eType;
         var db;
-        
-        var collectYears = function(collection) {
-            var result = []
-            for(var i in collection) {
-                result.push(collection[i].year);
-            }
-            return result;
-        }
-        
-        var collectValues = function(collection) {
-            var result = [];
-            var data = collection.data;
-            var i;
-            for(i = 0; i < data.length; i++) {
-                result.push(parseInt(data[i].value));
-            }
-            return result;
-        }
-        
-        var collectLabels = function(fromYear, toYear) {
-            var result = [];
-            var i;
-            for(i = 0; i < $scope.years.length; i++) {
-                if($scope.years[i] >= fromYear && $scope.years[i] <= toYear) {
-                    result.push($scope.years[i]);
-                }
-            }
-            return result;
-        }
         
         var activateCountries = function() {
             $scope.series = [];
@@ -45,7 +17,7 @@
                 unidostat.dbData(
                     db.name, 
                     countries[i].code, 
-                    "14", 
+                    "D", 
                     $scope.fromYear, 
                     $scope.toYear, 
                     [$scope.selectedIndustry.code])

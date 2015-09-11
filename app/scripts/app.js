@@ -4,6 +4,9 @@
 
     app.config(function($routeProvider){
         $routeProvider
+            .when("/jasmine", {
+              templateUrl: "tests/jasmine.html"  
+            })
             .when("/main", {
                 templateUrl: "main.html",
                 controller: "MainController"

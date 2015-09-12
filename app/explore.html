@@ -6,7 +6,7 @@
 	no-results-text="'No Industries in data set.'"
 	ng-model="selectedIndustry" 
 	ng-options="i.code + ' ' + i.name for i in availableIndustries"
-	ng-change="updateGraph()">
+	ng-change="refresh()">
 </select>
 </div>
 
@@ -17,7 +17,7 @@
 	no-results-text="'No Countries in data set.'"
 	ng-model="selectedCountry" 
 	ng-options="c.name for c in availableCountries"
-	ng-change="updateGraph()">
+	ng-change="refresh()">
 	<option></option>
 </select>
 </div>
@@ -27,7 +27,7 @@
 	chosen 
 	ng-model="fromYear" 
 	ng-options="y for y in years"
-	ng-change="updateGraph()">
+	ng-change="refresh()">
 	<option></option>
 </select>
 <select 
@@ -35,7 +35,7 @@
 	chosen 
 	ng-model="toYear" 
 	ng-options="y for y in years"
-	ng-change="updateGraph()">
+	ng-change="refresh()">
 </select>
 </div>
 <canvas id="line" class="chart chart-line" chart-data="data"

@@ -15,11 +15,11 @@
 			}
 			
 			var codeToCountry = function(code) {
-				return codeToName(dbInfo.db.countries, code);
+				return codeToName(dbInfo.countries, code);
 			}
 			
 			var codeToISIC = function(code) {
-				return codeToName(dbInfo.db.isics, code);
+				return codeToName(dbInfo.isics, code);
 			}
 			
 			decoders = {
@@ -45,7 +45,10 @@
 					});
 					
 					result.push(_.map(years, function(y) {
-						return flatGrouped[y];
+						if(flatGrouped[y])
+							return flatGrouped[y];
+						else
+							return 0;
 					}));
 				});
 				
@@ -57,7 +60,7 @@
 			};
 			
 			var getLabels = function() {
-				return _.pluck(dbInfo.db.periods, 'year');
+				return _.pluck(dbInfo.periods, 'year').sort();
 			}
 			
 			return {

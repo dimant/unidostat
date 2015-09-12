@@ -11,21 +11,21 @@
         var waiting = 0;
         
         var getData = function(country, industry, variable) {
-                unidostat.dbData(
-                    dbInfo.name, 
-                    country.code, 
-                    variable, 
-                    $scope.fromYear, 
-                    $scope.toYear, 
-                    industry.code)
-                    .then(function(d) {
-                        dP.addRawData(d);
-                        waiting = waiting - 1;
-                        if(waiting == 0) {
-                            updateGraph();
-                        }
-                    });            
-        }
+            unidostat.dbData(
+                dbInfo.name, 
+                country.code, 
+                variable, 
+                $scope.fromYear, 
+                $scope.toYear, 
+                industry.code)
+                .then(function(d) {
+                    dP.addRawData(d);
+                    waiting = waiting - 1;
+                    if(waiting == 0) {
+                        updateGraph();
+                    }
+                });            
+        };
         
         var activateCountries = function() {
             dP = dataProcessor.newDataProcessor(dbInfo, 'country');
@@ -47,29 +47,35 @@
             });            
         };
         
-        var updateGraph = function() {                       
+        var updateGraph = function() { 
             $scope.labels = dP.getLabels();
             $scope.data = dP.getData(); 
-            $scope.series = dP.getSeries();
+            $scope.series = dP.getSeries();            
         }
 
         var activate = function() {
             dbInfo = appstate.getDbInfo();
-
+            $scope.years = _.pluck(dbInfo.periods, 'year').sort();
             $scope.fromYear = $scope.years[0];
             $scope.toYear = $scope.years[$scope.years.length - 1];            
 
-            $scope.selectedIndustry = $scope.availableIndustries[$scope.availableIndustries.length-1];            
-            $scope.selectedCountry = $scope.availableCountries[0];
-            $scope.selectedVariable = "D";
+            $scope.availableIndustries = dbInfo.isics;
+            $scope.selectedIndustry = $scope.availableIndustries[$scope.availableIndustries.length-1];
             
+            $scope.availableCountries = dbInfo.countries;         
+            $scope.selectedCountry = $scope.availableCountries[0];
+            $scope.selectedVariable = "14";
+            refresh();
+        }
+        
+        var refresh = function() {
             if($scope.eType == 'industries')
                 activateIndustries();
             else if($scope.eType == 'countries')
-                activateCountries();
+                activateCountries();            
         }
 
-        $scope.updateGraph = updateGraph;
+        $scope.refresh = refresh;
 
         $scope.back = function() {
             $location.path("/main");

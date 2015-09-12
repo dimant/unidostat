@@ -37,22 +37,14 @@
                 });
         });
 
-        var createDataQuery = function(db, country, variable, start, end, industries) {
-            var uriJoin = function(arr) {
-              var str = [];
-              for(var o in arr) {
-                  str.push(encodeURIComponent(arr[o]));
-              }
-              return str.join(',');
-            };
-
+        var createDataQuery = function(db, country, variable, start, end, industry) {
             var query = 
                 "db=" + encodeURIComponent(db) + 
                 "&cc=" + encodeURIComponent(country) +
                 "&variable=" + encodeURIComponent(variable) +
                 "&start=" + encodeURIComponent(start) + 
                 "&end=" + encodeURIComponent(end) +
-                "&isic=" + uriJoin(industries);
+                "&isic=" + encodeURIComponent(industry);
             
             return query;
         };
@@ -74,8 +66,8 @@
                 });        
         });
         
-        var dbData = function (db, country, variable, start, end, industries) {
-            var query = createDataQuery(db, country, variable, start, end, industries);
+        var dbData = function (db, country, variable, start, end, industry) {
+            var query = createDataQuery(db, country, variable, start, end, industry);
             return _dbData(query);
         };
 

@@ -72,24 +72,24 @@ describe('dataProcessor service tests', function () {
         };
         
         it('should return all years as labels', function () {
-            dP = dataProcessor.newDataProcessor(dbInfo);
-            expect(dP.getLabels()).toEqual([1963, 1964, 1965]);
+            dP = dataProcessor.newDataProcessor(dbInfo.db);
+            expect(dP.getLabels(1963, 1965)).toEqual([1963, 1964, 1965]);
         });
 
         describe('country lists', function () {
             beforeEach(function () {
-                dP = dataProcessor.newDataProcessor(dbInfo, 'country');
+                dP = dataProcessor.newDataProcessor(dbInfo.db, 'country');
             });
 
             it('should convert code to country', function () {
                 expect(dP.codeToCountry('01')).toEqual('A');
             });
             
-            it('should pad missing years with "undefined" values', function () {
+            it('should pad missing years with "0" values', function () {
                 dP.addRawData(country1);
                 dP.addRawData(country2);
 
-                expect(dP.getData()).toEqual([[1, 2, undefined], [undefined, 1, 2]]);
+                expect(dP.getData(1963, 1965)).toEqual([[1, 2, 0], [0, 1, 2]]);
             });
 
             it('should contain a country string for each data that has entries', function () {
@@ -103,18 +103,18 @@ describe('dataProcessor service tests', function () {
 
         describe('industry lists', function () {
             beforeEach(function () {
-                dP = dataProcessor.newDataProcessor(dbInfo, 'isic');
+                dP = dataProcessor.newDataProcessor(dbInfo.db, 'isic');
             });
 
             it('should convert code to ISIC', function () {
                 expect(dP.codeToISIC('20')).toEqual('AI');
             });
             
-            it('should pad missing years with "undefined" values', function () {
+            it('should pad missing years with "0" values', function () {
                 dP.addRawData(country1);
                 dP.addRawData(country1a);
 
-                expect(dP.getData()).toEqual([[1, 2, undefined], [undefined, 1, 2]]);
+                expect(dP.getData(1963, 1965)).toEqual([[1, 2, 0], [0, 1, 2]]);
             });
 
             it('should contain a country string for each data that has entries', function () {

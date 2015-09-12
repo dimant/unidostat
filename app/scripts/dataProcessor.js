@@ -59,7 +59,7 @@
 				return _.map(_.keys(grouped), decoders[groupBy]);
 			};
 			
-			var getLabels = function(start, end) {
+			var getLabels = function(start, end)  {
 				return _.filter(_.pluck(dbInfo.periods, 'year').sort(), function(y) {
 					return 	y >= start && y <= end;
 				});

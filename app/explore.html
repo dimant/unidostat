@@ -27,7 +27,7 @@
 	chosen 
 	ng-model="fromYear" 
 	ng-options="y for y in years"
-	ng-change="refresh()">
+	ng-change="trimXAxis()">
 	<option></option>
 </select>
 <select 
@@ -35,11 +35,14 @@
 	chosen 
 	ng-model="toYear" 
 	ng-options="y for y in years"
-	ng-change="refresh()">
+	ng-change="trimXAxis()">
 </select>
 </div>
-<canvas id="line" class="chart chart-line" chart-data="data"
-  chart-labels="labels" chart-legend="true" chart-series="series" >
+<div style="width:800px">
+<canvas id="line" 
+  	class="chart chart-line" chart-data="data"
+ 	chart-labels="labels" chart-legend="true" chart-series="series" >
 </canvas> 
+</div>
 
 <button class="btn btn-default" ng-click="back()">Home</button>

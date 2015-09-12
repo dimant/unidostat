@@ -47,11 +47,15 @@
             });            
         };
         
-        var updateGraph = function() { 
-            $scope.labels = dP.getLabels();
-            $scope.data = dP.getData(); 
-            $scope.series = dP.getSeries();            
+        var trimXAxis = function() {
+            $scope.labels = dP.getLabels($scope.fromYear, $scope.toYear);            
         }
+        
+        var updateGraph = function() {
+            trimXAxis();
+            $scope.data = dP.getData($scope.fromYear, $scope.toYear);
+            $scope.series = dP.getSeries();            
+        };
 
         var activate = function() {
             dbInfo = appstate.getDbInfo();
@@ -66,20 +70,21 @@
             $scope.selectedCountry = $scope.availableCountries[0];
             $scope.selectedVariable = "14";
             refresh();
-        }
+        };
         
         var refresh = function() {
             if($scope.eType == 'industries')
                 activateIndustries();
             else if($scope.eType == 'countries')
                 activateCountries();            
-        }
+        };
 
         $scope.refresh = refresh;
-
+        $scope.trimXAxis = trimXAxis;
+        
         $scope.back = function() {
             $location.path("/main");
-        }
+        };       
 
         activate();
     };

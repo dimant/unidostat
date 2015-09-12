@@ -33,8 +33,8 @@
 				}
 			};
 			
-			var getData = function() {
-				var years = getLabels();
+			var getData = function(start, end) {
+				var years = getLabels(start, end);
 				var result = [];
 				
 				_.each(grouped, function(d, c) {
@@ -59,8 +59,10 @@
 				return _.map(_.keys(grouped), decoders[groupBy]);
 			};
 			
-			var getLabels = function() {
-				return _.pluck(dbInfo.periods, 'year').sort();
+			var getLabels = function(start, end) {
+				return _.filter(_.pluck(dbInfo.periods, 'year').sort(), function(y) {
+					return 	y >= start && y <= end;
+				});
 			}
 			
 			return {

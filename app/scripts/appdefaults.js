@@ -7,7 +7,7 @@
               variable: "04",
               start: "2008",
               end: "2009",
-              industries:["15"]
+              industry:"15"
         };
 		
 		return defaults;

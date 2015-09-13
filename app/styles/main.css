@@ -2,42 +2,21 @@
 	margin-left:4px;
 }
 
-header {
+.header {
 	background:#4b92db;
-	color:white;	
+	color:white;
 }
 
-header a:link {
+.header a:link {
 	color:white
 }
-header a:visited {
+.header a:visited {
 	color:white
 }
-header a:hover {
+.header a:hover {
 	color:white
 }
-header a:active {
-	color:white
-}
-
-footer {
-	background:#4b92db;
-	color:white;	
-	position: fixed;
-    bottom:0;	
-	width: 100%;
-}
-
-footer a:link {
-	color:white
-}
-footer a:visited {
-	color:white
-}
-footer a:hover {
-	color:white
-}
-footer a:active {
+.header a:active {
 	color:white
 }
 
@@ -45,4 +24,25 @@ footer a:active {
 	width:20px;
 	margin-right:7px;
 	margin-top:-4px;
+}
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+.wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -30px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+.footer {
+  height: 30px;
 }

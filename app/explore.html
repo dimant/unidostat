@@ -1,61 +1,73 @@
-<table>
-	<tr>
-		<td>
-			lorem ipsum
-		</td>
-		<td>
-<nvd3-line-chart
-	data="data"">
-</nvd3-line-chart>			
-		</td>
-	</tr>
-</table>
-
-<div>
-<div ng-show="eType == 'countries'">
-<select width="'350px'" 
-	chosen 
-	data-placeholder="Select Industry" 
-	no-results-text="'No Industries in data set.'"
-	ng-model="selectedIndustry" 
-	ng-options="i.code + ' ' + i.name for i in availableIndustries"
-	ng-change="refresh()">
-</select>
+<script src="tests/sample-data.js"></script>
+	
+<div ng-show="eType == 'countries'" class="col-md-5">	
+	<h4 class="col-md-12 panel-title">
+		<img src="visuals/factory6.svg" class="icon">Industry
+		<select  
+			chosen
+			data-placeholder="Select Industry"
+			no-results-text="'No Industries in data set.'"
+			ng-model="selectedIndustry" 
+			ng-options="i.code + ' ' + i.name for i in availableIndustries"
+			ng-change="refresh()">
+		</select>
+	</h4>
 </div>
 
-<div ng-show="eType == 'industries'">
-<select width="'350px'" 
-	chosen 
-	data-placeholder="Select Country" 
-	no-results-text="'No Countries in data set.'"
-	ng-model="selectedCountry" 
-	ng-options="c.name for c in availableCountries"
-	ng-change="refresh()">
-	<option></option>
-</select>
+<div ng-show="eType == 'industries'" class="col-md-5">
+		<h4 class="col-md-12 panel-title">
+		<img src="visuals/factory6.svg" class="icon">Country
+		<select  
+			chosen
+			data-placeholder="Select Country"
+			no-results-text="'No Countries in data set.'"
+			ng-model="selectedCountry" 
+			ng-options="i.code + ' ' + i.name for i in availableCountries"
+			ng-change="refresh()">
+		</select>
+	</h4>
 </div>
 
-<select 
-	width="'100px'"
-	chosen 
-	ng-model="fromYear" 
-	ng-options="y for y in years"
-	ng-change="trimXAxis()">
-	<option></option>
-</select>
-<select 
-	width="'100px'"
-	chosen 
-	ng-model="toYear" 
-	ng-options="y for y in years"
-	ng-change="trimXAxis()">
-</select>
-</div>
-<div style="width:800px">
-<canvas id="line" 
-  	class="chart chart-line" chart-data="data"
- 	chart-labels="labels" chart-legend="true" chart-series="series" >
-</canvas> 
+<div class="col-md-4">
+	<h4 class="col-md-12 panel-title">
+		<img src="visuals/mathematics8.svg" class="icon">Variable
+		<select 
+			chosen 
+			ng-model="selectedVariable" 
+			ng-options="v.name for v in availableVariables"
+			ng-change="refresh()">
+			<option></option>
+		</select>
+	</h4>		
 </div>
 
-<button class="btn btn-default" ng-click="back()">Home</button>
+<div class="col-md-3">
+	<h4 class="col-md-6 panel-title">
+		From
+		<select 
+			width="'70px'"
+			chosen 
+			ng-model="fromYear" 
+			ng-options="y for y in years"
+			ng-change="trimXAxis()">
+			<option></option>
+		</select>
+	</h4>
+	<h4 class="col-md-6 panel-title">
+		To
+		<select 
+			width="'70px'"
+			chosen 
+			ng-model="toYear" 
+			ng-options="y for y in years"
+			ng-change="trimXAxis()">
+		</select>
+	</h4>
+</div>
+
+<div class="col-md-12">
+	<canvas id="line" height="100%"
+		class="chart chart-line" chart-data="data"
+		chart-labels="labels" chart-legend="true" chart-series="series" >
+	</canvas> 	
+</div>

@@ -14,7 +14,7 @@
             unidostat.dbData(
                 dbInfo.name,
                 country.code,
-                variable,
+                variable.code,
                 $scope.fromYear,
                 $scope.toYear,
                 industry.code)
@@ -38,12 +38,12 @@
         };
 
         var activateIndustries = function () {
-            dP = dataProcessor.newDataProcessor(dbInfo, 'industry');
+            dP = dataProcessor.newDataProcessor(dbInfo, 'isic');
             var industries = appstate.getIndustries();
             waiting = industries.length;
 
-            _.each(industries, function (c) {
-                getData(c, $scope.selectedIndustry, $scope.selectedVariable);
+            _.each(industries, function (i) {
+                getData($scope.selectedCountry, i, $scope.selectedVariable);
             });
         };
 
@@ -54,16 +54,22 @@
         var updateGraph = function () {
             trimXAxis();
             $scope.data = dP.getData($scope.fromYear, $scope.toYear);
-            console.log($scope.data);
-            $scope.sparkdata = { 
-                key: 'A',
-                values: $scope.data  
-            };
             $scope.series = dP.getSeries();
+            $log.info($scope.data);
         };
 
         var activate = function () {
             dbInfo = appstate.getDbInfo();
+            // test code
+            if(!dbInfo) {
+                unidostat.setCredentials("diman.todorov@outlook.com", "r0llerball");
+                appstate.setDbInfo(indstatDbInfo.db);
+                appstate.setCountries([{code: "040", name:"Austria"}]);
+                appstate.setIndustries([{code: "04", name: "Employees"}]);
+                dbInfo = appstate.getDbInfo();
+            }
+            // --------
+
             $scope.years = _.pluck(dbInfo.periods, 'year').sort();
             $scope.fromYear = $scope.years[0];
             $scope.toYear = $scope.years[$scope.years.length - 1];
@@ -73,7 +79,9 @@
 
             $scope.availableCountries = dbInfo.countries;
             $scope.selectedCountry = $scope.availableCountries[0];
-            $scope.selectedVariable = "14";
+            
+            $scope.availableVariables = dbInfo.variables;
+            $scope.selectedVariable = $scope.availableVariables[0];
 
             refresh();
         };

@@ -1,67 +1,101 @@
 <!DOCTYPE html>
 
 <html ng-app="unidostat">
-	<head>
-		<!-- jquery -->
-		<script src="bower_components/jquery/dist/jquery.js"></script>
 
-		<!-- underscore -->
-		<script src="bower_components/underscore/underscore.js"></script>
+<head>
+	<!-- jquery -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
 
-		<!-- chosen -->
-		<script src="bower_components/chosen/chosen.jquery.min.js"></script>
-		<link rel="stylesheet" href="bower_components/chosen/chosen.min.css">
+	<!-- underscore -->
+	<script src="bower_components/underscore/underscore.js"></script>
 
-		<!-- bootstrap -->
-		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
-		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap-theme.css">
-		<script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+	<!-- chosen -->
+	<script src="bower_components/chosen/chosen.jquery.min.js"></script>
+	<link rel="stylesheet" href="bower_components/chosen/chosen.css">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
+	<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap-theme.css">
+	<script src="bower_components/bootstrap-css/js/bootstrap.js"></script>
 
-		<!-- angular -->
-		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-route/angular-route.js"></script>
-		
-		<!-- angular chosen -->
-		<script src="bower_components/angular-chosen-localytics/chosen.js"></script>
-		<link rel="stylesheet" href="bower_components/angular-chosen-localytics/chosen-spinner.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- chart.js -->
-		<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
-		<script src="bower_components/Chart.js/Chart.min.js"></script>
-		<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
-		
-		<!-- sparklines -->
-		<script src="bower_components/d3/d3.js"></script>
-		<script src="bower_components/nvd3/build/nv.d3.js"></script>
-		<script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
-		<link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css"/>
+	<!-- angular -->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
 
-		<!-- my stuff -->
-		<link rel="stylesheet" href="styles/main.css" />
-		<script src="scripts/app.js"></script>
-		<script src="scripts/appstate.js"></script>
-		<script src="scripts/appdefaults.js"></script>
-		<script src="scripts/unidostat.js"></script>
-		<script src="scripts/MainController.js"></script>
-		<script src="scripts/AttributionsController.js"></script>
-		<script src="scripts/FooterController.js"></script>	
-		<script src="scripts/ExploreController.js"></script>
-		<script src="scripts/dataProcessor.js"></script>
-	</head>
+	<!-- angular chosen -->
+	<script src="bower_components/angular-chosen-localytics/chosen.js"></script>
+	<link rel="stylesheet" href="bower_components/angular-chosen-localytics/chosen-spinner.css">
 
-	<body> 
-		<header style="overflow:hidden">
+	<!-- chart.js -->
+	<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+	<script src="bower_components/Chart.js/Chart.min.js"></script>
+	<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+
+	<!-- sparklines -->
+	<script src="bower_components/d3/d3.js"></script>
+	<script src="bower_components/nvd3/build/nv.d3.js"></script>
+	<script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
+	<link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+
+	<!-- my stuff -->
+	<link rel="stylesheet" href="styles/main.css" />
+	<script src="scripts/app.js"></script>
+	<script src="scripts/appstate.js"></script>
+	<script src="scripts/appdefaults.js"></script>
+	<script src="scripts/unidostat.js"></script>
+	<script src="scripts/MainController.js"></script>
+	<script src="scripts/AttributionsController.js"></script>
+	<script src="scripts/FooterController.js"></script>
+	<script src="scripts/ExploreController.js"></script>
+	<script src="scripts/dataProcessor.js"></script>
+
+</head>
+
+<body>
+	<div class="wrap">
+	<div style="overflow:hidden" class="header">
+		<div>
 			<a href="#/main" onmouseup="blur(this)">
-			<img src="visuals/Flag_of_UNIDO-transparent.svg" 
-				style="float:left;margin-left:-55px;margin-right:-60px;margin-top:-25px;margin-bottom:-25px;" 
-				width="250px"/>
-			<span><h3 style="margin-top:30px;font-variant:small-caps">United Nations<br/>Industrial Development Organization</h3></span></a>
-		</header>
-		<div ng-view></div>
-		<footer ng-controller="FooterController">
-			<a href="#/attributions" onmouseup="blur(this)" title="attributions">attributions</a>
-		</footer>
-	</body>
+				<img src="visuals/Flag_of_UNIDO-transparent.svg" 
+					style="float:left;margin-left:-55px;margin-right:-60px;margin-top:-53px;margin-bottom:-25px;"
+					width="250px" />
+				<span>
+						<h3 style="margin-top:30px;font-variant:small-caps">
+							United Nations<br/>Industrial Development Organization</h3>
+					</span>
+			</a>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/main">
+					Home
+				</a>
+			</div>
+			<form class="navbar-form navbar-right" role="login">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Email">
+					<input type="password" class="form-control" placeholder="Password">
+				</div>
+				<button type="submit" class="btn btn-default">Login</button>
+			</form>
+		</div>
+	</nav>
+
+
+		<div class="container-fluid">
+			<div ng-view class="col-md-12"></div>
+		</div>
+	</div>
+
+
+	<div ng-controller="FooterController" class="col-md-12 footer header">
+		<a href="#/attributions" onmouseup="blur(this)" title="attributions">attributions</a>
+	</div>
+</body>
+
 </html>

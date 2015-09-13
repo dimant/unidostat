@@ -36,7 +36,11 @@
                     ng-options="c.name for c in availableCountries">
                     <option></option>
                 </select>
-                <input type="submit" class="btn btn-default" value="Explore">
+                <input 
+                    type="submit" 
+                    class="btn btn-default" 
+                    value="Explore"
+                    ng-disabled="!availableCountries || availableCountries.length == 0">
             </div>
         </form>          
       </div>
@@ -55,7 +59,9 @@
 
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">     
-        <form>
+        <form
+            name="industriesForm"
+            ng-submit="explore(industries, industriesForm.$valid)">
             <div class="form-group">
                 <select width="'350px'"
                     required
@@ -63,11 +69,15 @@
                     chosen multiple 
                     data-placeholder="Select Industries" 
                     no-results-text="'No Industries in data set.'"
-                    ng-model="selectedIndustries" 
+                    ng-model="selectedIndustries"
                     ng-options="i.code + ' ' + i.name for i in availableIndustries">
                     <option></option>
                 </select>
-                <button class="btn btn-default" ng-click="explore('industries')">Explore</button>
+                <input 
+                    type="submit" 
+                    class="btn btn-default" 
+                    value="Explore"
+                    ng-disabled="!availableIndustries || availableIndustries.length == 0">
             </div>
         </form>    
       </div>

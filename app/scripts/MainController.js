@@ -27,23 +27,43 @@
         };
         
         var selectedDataChanged = function() {
-            unidostat.dbInfo($scope.selectedData.name).then(onDbInfo, onError);
+            if($scope.loggedin)
+                unidostat.dbInfo($scope.selectedData.name).then(onDbInfo, onError);
         }
 
         var activate = function() {
-            unidostat.setCredentials("diman.todorov@outlook.com", "r0llerball");
             unidostat.dbList().then(onDbList, onError);    
         };        
         
+        var logmein = function(user) {
+            unidostat.setCredentials($scope.user.email, $scope.user.password);
+            unidostat.isCredentialsValid().then(
+                function(success){
+                    $scope.loggedin = true;
+                },
+                function(error){
+                    
+                }
+            );
+
+        }
+        
+        var logmeout = function() {
+            unidostat.setCredentials("","");
+            $scope.loggedin = false;
+        }
+        
         activate();
+        
+        $scope.logmein = logmein;
+        $scope.logmeout = logmeout;
+        $scope.selectedDataChanged = selectedDataChanged;
         
         $scope.explore = function(eType) {
             appstate.setCountries($scope.selectedCountries);
             appstate.setIndustries($scope.selectedIndustries);
             $location.path("/explore/"+eType+"/"+$scope.selectedData.name);
-        }
-        
-        $scope.selectedDataChanged = selectedDataChanged;
+        }        
     };
 
     app.controller("MainController", MainController);

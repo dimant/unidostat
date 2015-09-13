@@ -20,6 +20,14 @@
         var isCredentialsSet = function () {
             return username != null && password != null;
         }
+        
+        var isCredentialsValid = function() {
+             return $http
+                .get(url + "/dbinfo/" + "INDSTAT%202%202015,%20ISIC%20Revision%203", getConfig())
+                .then(function(success) {
+                    return true;
+                });
+        }
 
         var dbList = _.memoize(function () {
             return $http
@@ -78,6 +86,7 @@
         return {
             setCredentials: setCredentials,
             isCredentialsSet: isCredentialsSet,
+            isCredentialsValid: isCredentialsValid,
             dbList: dbList,
             dbInfo: dbInfo,
             dbData: dbData,

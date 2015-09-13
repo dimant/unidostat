@@ -3,11 +3,11 @@
         var _state = {};
         var listeners = {};
         
-        var propertyChanged = function(propertyName, oldValue, newValue) {
+        var propertyChanged = function(propertyName, newValue, oldValue) {
             if(listeners[propertyName] != null) {
-                for(var l in listeners[propertyName]) {
-                    l(oldValue, newValue);
-                }
+                _.each(listeners[propertyName], function(l) {
+                    l(newValue, oldValue);
+                });
             }
         }
         
@@ -29,7 +29,7 @@
           };
           var oldValue = _state.credentials;          
           _state.credentials = newValue;
-          propertyChanged('credentials', oldValue, newValue);
+          propertyChanged('credentials', newValue, oldValue);
         };
         
         var getDbInfo = function() {
@@ -69,7 +69,7 @@
             };
             var oldValue = _state.period;
             _state.period = newValue;
-            propertyChanged('period', oldValue, newValue);
+            propertyChanged('period', newValue, oldValue);
         };
         
         var getIndustries = function() {

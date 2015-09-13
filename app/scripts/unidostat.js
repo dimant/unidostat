@@ -2,7 +2,7 @@
     var unidostat = function ($http, $log) {
         var url = "http://localhost:8080/stat.unido.org:443/rest";
         var username, password;
-
+        
         var getConfig = function () {
             return {
                 headers: {
@@ -21,9 +21,14 @@
             return username != null && password != null;
         }
         
-        var isCredentialsValid = function() {
+        var isCredentialsValid = function(_username, _password) {
              return $http
-                .get(url + "/dbinfo/" + "INDSTAT%202%202015,%20ISIC%20Revision%203", getConfig())
+                .get(url + "/dbinfo/" + "INDSTAT%202%202015,%20ISIC%20Revision%203", {
+                    headers: {
+                        'Username': _username,
+                        'Password': _password
+                    }
+                })
                 .then(function(success) {
                     return true;
                 });

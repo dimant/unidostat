@@ -1,6 +1,6 @@
 (function(){
     
-    var app = angular.module("unidostat", ["ngRoute", "localytics.directives", "chart.js", "nvd3ChartDirectives"]);
+    var app = angular.module("unidostat", ["ngRoute", "localytics.directives", "chart.js"]);
 
     app.config(function($routeProvider){
         $routeProvider

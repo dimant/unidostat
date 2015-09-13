@@ -35,18 +35,17 @@
             unidostat.dbList().then(onDbList, onError);    
         };        
         
-        var logmein = function(user) {
-            unidostat.setCredentials($scope.user.email, $scope.user.password);
-            unidostat.isCredentialsValid().then(
-                function(success){
-                    $scope.loggedin = true;
-                },
-                function(error){
-                    
-                }
-            );
-
-        }
+        var logmein = function(valid) {
+            if(valid) {
+                unidostat.setCredentials($scope.user.email, $scope.user.password);
+                unidostat.isCredentialsValid().then(
+                    function(success){
+                        $scope.loggedin = true;
+                    },
+                    onError
+                );                
+            }
+        };
         
         var logmeout = function() {
             unidostat.setCredentials("","");

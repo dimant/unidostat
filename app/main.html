@@ -22,20 +22,25 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-        <select width="'350px'" 
-            chosen multiple 
-            data-placeholder="Select Countries" 
-            no-results-text="'No Countries in data set.'"
-            ng-model="selectedCountries" 
-            ng-options="c.name for c in availableCountries">
-            <option></option>
-        </select><button class="btn btn-default" ng-click="explore('countries')">Explore</button>
+        <form>
+            <div class="form-group">
+                <select width="'350px'" 
+                    chosen multiple 
+                    data-placeholder="Select Countries" 
+                    no-results-text="'No Countries in data set.'"
+                    ng-model="selectedCountries" 
+                    ng-options="c.name for c in availableCountries">
+                    <option></option>
+                </select>
+                <button class="btn btn-default" ng-click="explore('countries')">Explore</button>
+            </div>
+        </form>          
       </div>
     </div>
   </div>
     <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
-      <div role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwoe" aria-expanded="false" aria-controls="collapseTwoe">
+      <div role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
         <h4 class="panel-title">
           <a class="collapsed">
             <img src="visuals/factory6.svg" class="icon" />Industries
@@ -43,16 +48,22 @@
         </h4>
       </div>
     </div>
-    <div id="collapseTwoe" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwoe">
-      <div class="panel-body">
-        <select width="'350px'" 
-            chosen multiple 
-            data-placeholder="Select Industries" 
-            no-results-text="'No Industries in data set.'"
-            ng-model="selectedIndustries" 
-            ng-options="i.code + ' ' + i.name for i in availableIndustries">
-            <option></option>
-        </select><button class="btn btn-default" ng-click="explore('industries')">Explore</button>
+
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">     
+        <form>
+            <div class="form-group">
+                <select width="'350px'" 
+                    chosen multiple 
+                    data-placeholder="Select Industries" 
+                    no-results-text="'No Industries in data set.'"
+                    ng-model="selectedIndustries" 
+                    ng-options="i.code + ' ' + i.name for i in availableIndustries">
+                    <option></option>
+                </select>
+                <button class="btn btn-default" ng-click="explore('industries')">Explore</button>
+            </div>
+        </form>    
       </div>
     </div>
   </div>

@@ -3,10 +3,9 @@
     var app = angular.module("unidostat");
 
     var MainController = function($scope, $location, $log, unidostat, appstate) {
-        var loggedin = false;
-    
+        
         var onDbList = function(dblist) {
-            if(loggedin) {
+            if(unidostat.isCredentialsSet()) {
                 $scope.availableData = dblist;
             } else {
                 $scope.availableData = _.filter(dblist, function(d) {
@@ -44,7 +43,6 @@
         activate();
         
         appstate.listenForProperty('credentials', function(newValue, oldValue) {
-            loggedin = unidostat.isCredentialsSet();
             activate();
         });
         

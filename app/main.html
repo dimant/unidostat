@@ -24,7 +24,7 @@
       <div class="panel-body">
         <form 
             name="countriesForm"
-            ng-submit="explore(countries, countriesForm.$valid)">
+            ng-submit="explore('countries', countriesForm.$valid)">
             <div class="form-group">
                 <select width="'350px'" 
                     name="countries"
@@ -61,7 +61,7 @@
       <div class="panel-body">     
         <form
             name="industriesForm"
-            ng-submit="explore(industries, industriesForm.$valid)">
+            ng-submit="explore('industries', industriesForm.$valid)">
             <div class="form-group">
                 <select width="'350px'"
                     required

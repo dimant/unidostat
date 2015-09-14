@@ -26,6 +26,10 @@
 	margin-top:-4px;
 }
 
+.exploreselect {
+	max-width:120px;
+}
+
 html,
 body {
   height: 100%;

@@ -2,15 +2,15 @@
 
     var app = angular.module("unidostat");
 
-    var ExploreController = function ($scope, $location, $routeParams, $log,
+    var ExploreController = function ($scope, $location, $routeParams, $log, $q,
         unidostat, appstate, appdefaults, dataProcessor) {
         $scope.eType = $routeParams.eType;
         var dbInfo;
         var dP;
 
-        var waiting = 0;
 
-        var getData = function (country, industry, variable) {
+
+        var getData = function (country, industry, variable, done) {
             unidostat.dbData(
                 dbInfo.name,
                 country.code,
@@ -20,27 +20,33 @@
                 industry.code)
                 .then(function (d) {
                     dP.addRawData(d);
-                    waiting = waiting - 1;
-                    if (waiting == 0) {
-                        updateGraph();
-                    }
+                    done();
                 });
         };
 
         var activateCountries = function () {
-            dP = dataProcessor.newDataProcessor(dbInfo, 'country');
-            var countries = appstate.getCountries();
-            waiting = countries.length;
-
-            _.each(countries, function (c) {
-                getData(c, $scope.selectedIndustry, $scope.selectedVariable);
+            return $q(function(resolve, reject) {
+                dP = dataProcessor.newDataProcessor(dbInfo, 'country');
+                var countries = appstate.getCountries();
+                var waiting = countries.length;
+                
+                var done = function() {
+                    waiting = waiting - 1;
+                    if (waiting == 0) {
+                        resolve();
+                    }
+                }
+    
+                _.each(countries, function (c) {
+                    getData(c, $scope.selectedIndustry, $scope.selectedVariable, done);
+                });                
             });
         };
 
         var activateIndustries = function () {
             dP = dataProcessor.newDataProcessor(dbInfo, 'isic');
             var industries = appstate.getIndustries();
-            waiting = industries.length;
+            var waiting = industries.length;
 
             _.each(industries, function (i) {
                 getData($scope.selectedCountry, i, $scope.selectedVariable);
@@ -55,20 +61,10 @@
             trimXAxis();
             $scope.data = dP.getData($scope.fromYear, $scope.toYear);
             $scope.series = dP.getSeries();
-            $log.info($scope.data);
         };
 
         var activate = function () {
             dbInfo = appstate.getDbInfo();
-            // test code
-            if(!dbInfo) {
-                unidostat.setCredentials("diman.todorov@outlook.com", "r0llerball");
-                appstate.setDbInfo(indstatDbInfo.db);
-                appstate.setCountries([{code: "040", name:"Austria"}]);
-                appstate.setIndustries([{code: "04", name: "Employees"}]);
-                dbInfo = appstate.getDbInfo();
-            }
-            // --------
 
             $scope.years = _.pluck(dbInfo.periods, 'year').sort();
             $scope.fromYear = $scope.years[0];
@@ -90,7 +86,9 @@
             if ($scope.eType == 'industries')
                 activateIndustries();
             else if ($scope.eType == 'countries')
-                activateCountries();
+                $scope.promisedData = activateCountries().then(function() {
+                    updateGraph();
+                });
         };
 
         $scope.refresh = refresh;

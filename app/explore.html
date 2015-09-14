@@ -1,96 +1,99 @@
-<script src="tests/sample-data.js"></script>
-	
-<div ng-show="eType == 'countries'">	
-	<h4 class="col-md-12 panel-title">
-		<div class="col-md-6 exploreselect">
-			<img src="visuals/factory6.svg" class="icon">Industry			
-		</div>
-		<div class="col-md-6">
-			<select  
-				chosen
-				data-placeholder="Select Industry"
-				no-results-text="'No Industries in data set.'"
-				ng-model="selectedIndustry" 
-				ng-options="i.code + ' ' + i.name for i in availableIndustries"
-				ng-change="refresh()">
-			</select>
-		</div>
-	</h4>
-</div>
 
-<div ng-show="eType == 'industries'">
+
+<div cg-busy="promisedData">
+	<div ng-show="eType == 'countries'">	
 		<h4 class="col-md-12 panel-title">
-		<div class="col-md-6 exploreselect">
-			<img src="visuals/factory6.svg" class="icon">Country			
-		</div>
-		<div class="col-md-6">
-			<select  
-				chosen
-				data-placeholder="Select Country"
-				no-results-text="'No Countries in data set.'"
-				ng-model="selectedCountry" 
-				ng-options="i.code + ' ' + i.name for i in availableCountries"
-				ng-change="refresh()">
-			</select>
-		</div>
-	</h4>
-</div>
-
-<div>
-	<h4 class="col-md-12 panel-title">
-		<div class="col-md-6 exploreselect">
-			<img src="visuals/mathematics8.svg" class="icon">Variable			
-		</div>
-		<div class="col-md-6">
-			<select 
-				chosen 
-				ng-model="selectedVariable" 
-				ng-options="v.name for v in availableVariables"
-				ng-change="refresh()">
-				<option></option>
-			</select>			
-		</div>
-	</h4>		
-</div>
-
-<div class="col-md-12">
-	<h4 class="panel-title">
-		<div class="col-md-6 exploreselect">
-			From		
-		</div>
-		<div class="col-md-6">
-			<select 
-				width="'70px'"
-				chosen 
-				ng-model="fromYear" 
-				ng-options="y for y in years"
-				ng-change="trimXAxis()">
-				<option></option>
-			</select>
-		</div>
-	</h4>
-</div>
-
-<div class="col-md-12">
-	<h4 class="panel-title">
-		<div class="col-md-6 exploreselect">
-			To 			
-		</div>
-		<div class="col-md-6">
-			<select 
-				width="'70px'"
-				chosen 
-				ng-model="toYear" 
-				ng-options="y for y in years"
-				ng-change="trimXAxis()">
-			</select>
-		</div>
-	</h4>
-</div>
-
-<div class="col-md-12">
-	<canvas id="line" height="100%"
-		class="chart chart-line" chart-data="data"
-		chart-labels="labels" chart-legend="true" chart-series="series" >
-	</canvas> 	
+			<div class="col-md-6 exploreselect">
+				<img src="visuals/factory6.svg" class="icon">Industry			
+			</div>
+			<div class="col-md-6">
+				<select  
+					chosen
+					data-placeholder="Select Industry"
+					no-results-text="'No Industries in data set.'"
+					ng-model="selectedIndustry" 
+					ng-options="i.code + ' ' + i.name for i in availableIndustries"
+					ng-change="refresh()">
+				</select>
+			</div>
+		</h4>
+	</div>
+	
+	<div ng-show="eType == 'industries'">
+			<h4 class="col-md-12 panel-title">
+			<div class="col-md-6 exploreselect">
+				<img src="visuals/factory6.svg" class="icon">Country			
+			</div>
+			<div class="col-md-6">
+				<select  
+					chosen
+					data-placeholder="Select Country"
+					no-results-text="'No Countries in data set.'"
+					ng-model="selectedCountry" 
+					ng-options="i.code + ' ' + i.name for i in availableCountries"
+					ng-change="refresh()">
+				</select>
+			</div>
+		</h4>
+	</div>
+	
+	<div>
+		<h4 class="col-md-12 panel-title">
+			<div class="col-md-6 exploreselect">
+				<img src="visuals/mathematics8.svg" class="icon">Variable			
+			</div>
+			<div class="col-md-6">
+				<select 
+					chosen 
+					ng-model="selectedVariable" 
+					ng-options="v.name for v in availableVariables"
+					ng-change="refresh()">
+					<option></option>
+				</select>			
+			</div>
+		</h4>		
+	</div>
+	
+	<div class="col-md-12">
+		<h4 class="panel-title">
+			<div class="col-md-6 exploreselect">
+				From		
+			</div>
+			<div class="col-md-6">
+				<select 
+					width="'70px'"
+					chosen 
+					ng-model="fromYear" 
+					ng-options="y for y in years"
+					ng-change="trimXAxis()">
+					<option></option>
+				</select>
+			</div>
+		</h4>
+	</div>
+	
+	<div class="col-md-12">
+		<h4 class="panel-title">
+			<div class="col-md-6 exploreselect">
+				To 			
+			</div>
+			<div class="col-md-6">
+				<select 
+					width="'70px'"
+					chosen 
+					ng-model="toYear" 
+					ng-options="y for y in years"
+					ng-change="trimXAxis()">
+				</select>
+			</div>
+		</h4>
+	</div>
+	
+	
+	<div class="col-md-12">
+		<canvas id="line" height="100%"
+			class="chart chart-line" chart-data="data"
+			chart-labels="labels" chart-legend="true" chart-series="series" >
+		</canvas> 	
+	</div>
 </div>

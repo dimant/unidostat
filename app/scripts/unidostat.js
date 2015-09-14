@@ -63,7 +63,6 @@
         };
 
         var _dbData = _.memoize(function(query) {
-            console.log(query);
             return $http({
                     method: 'POST',
                     url: url + "/dbdata",

@@ -24,8 +24,11 @@
         var onDbInfo = function(db) {
             appstate.setDbInfo(db);
             
-            $scope.availableIndustries = db.isics;              
+            $scope.availableIndustries = db.isics;
+            $scope.selectedIndustries = appstate.getIndustries();
+                  
             $scope.availableCountries = db.countries;
+            $scope.selectedCountries = appstate.getCountries();
         }
         
         var onError = function(reason){

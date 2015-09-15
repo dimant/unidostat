@@ -3,3 +3,5 @@ app/bower_components/
 typings/
 dist/
 *~
+*.pem
+*.log

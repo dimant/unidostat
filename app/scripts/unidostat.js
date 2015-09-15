@@ -1,6 +1,7 @@
 (function () {
     var unidostat = function ($http, $log) {
-        var url = "http://localhost:8123/rest";
+        //var url = "https://localhost:8080/stat.unido.org:443/rest";
+        var url = "https://localhost:8123/rest";
         var username, password;
         
         var getConfig = function () {

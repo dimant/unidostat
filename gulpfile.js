@@ -3,8 +3,8 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
-var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
+var rimraf = require('gulp-rimraf');
 var removeHtmlComments = require('gulp-remove-html-comments');
 var httpServer = require('http-server');
 
@@ -59,6 +59,11 @@ gulp.task('copy-visuals', function() {
 gulp.task('copy-bower', function() {
 	return gulp.src(['app/bower_components/**/*'])
 		.pipe(gulp.dest('dist/bower_components'));
+});
+
+gulp.task('clean', function() {
+  return gulp.src('dist/**/*', { read: false })
+		.pipe(rimraf());
 });
 
 gulp.task('build', ['copy-visuals', 'compile', 'copy-bower']);

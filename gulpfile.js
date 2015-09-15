@@ -51,6 +51,16 @@ gulp.task('compile', function() {
 		.pipe(gulp.dest('dist'));
 });
 
+gulp.task('copy-chosen-pngs', function() {
+	return gulp.src('app/bower_components/chosen/*.png')
+		.pipe(gulp.dest('dist/css/'));
+});
+
+gulp.task('copy-chosen-gif', function() {
+	return gulp.src('app/bower_components/angular-chosen-localytics/spinner.gif')
+		.pipe(gulp.dest('dist/css/'));
+});
+
 gulp.task('copy-visuals', function() {
 	return gulp.src('app/visuals/*')
 		.pipe(gulp.dest('dist/visuals/'));
@@ -61,9 +71,5 @@ gulp.task('copy-bower', function() {
 		.pipe(gulp.dest('dist/bower_components'));
 });
 
-gulp.task('clean', function() {
-  return gulp.src('dist/**/*', { read: false })
-		.pipe(rimraf());
-});
 
-gulp.task('build', ['copy-visuals', 'compile', 'copy-bower']);
+gulp.task('build', ['copy-visuals', 'compile', 'copy-bower', 'copy-chosen-pngs', 'copy-chosen-gif']);

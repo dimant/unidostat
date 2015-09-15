@@ -11,23 +11,19 @@ var requestLogger = function (req, res, error) {
     }
 };
 
-var proxyServer = httpServer.createServer({
-	proxy: 'https://stat.unido.org:443/',
-	cors: true,
-	https: {
-		cert: 'diman_todorov_cert.pem',
-		key: 'diman_todorov_key.pem',
-	},
-	logFn: requestLogger
-});
-proxyServer.listen(8123);
-
 var server = httpServer.createServer({
-	root: './app',
+	proxy: 'https://stat.unido.org:443/',
+	root: './dist',
+	cors: true,
+	showDir: false,
+	autoIndex: false,
+
 	https: {
 		cert: 'diman_todorov_cert.pem',
 		key: 'diman_todorov_key.pem',
 	},
 	logFn: requestLogger
 });
-server.listen(8000);
+server.listen(8123);
+
+

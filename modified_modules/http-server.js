@@ -45,6 +45,7 @@ var HTTPServer = exports.HTTPServer = function (options) {
 
   if (options.cors) {
     this.headers['Access-Control-Allow-Origin'] = '*';
+    this.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
     this.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Username, Password';
 
     before.push(corser.create());

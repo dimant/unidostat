@@ -36,7 +36,8 @@
     "nvd3": "~1.8.1",
     "d3": "~3.5.6",
     "angular-animate": "~1.4.5",
-    "raphael": "2.1.0"
+    "raphael": "2.1.0",
+    "chosen": "e-tag:face03d32"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.5"

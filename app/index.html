@@ -3,6 +3,17 @@
 <html ng-app="unidostat">
 
 <head>
+	<!-- build:css css/styles.css -->
+	<link rel="stylesheet" href="bower_components/chosen/chosen.css">
+	<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
+	<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap-theme.css">
+	<link rel="stylesheet" href="bower_components/angular-chosen-localytics/chosen-spinner.css">
+	<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+	<link rel="stylesheet" href="modified_components/angular-busy.css" />
+	<link rel="stylesheet" href="styles/main.css" />
+	<!-- endbuild -->
+
+	<!-- build:js scripts/libs.js -->
 	<!-- jquery -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 
@@ -11,11 +22,8 @@
 
 	<!-- chosen -->
 	<script src="bower_components/chosen/chosen.jquery.min.js"></script>
-	<link rel="stylesheet" href="bower_components/chosen/chosen.css">
 
 	<!-- bootstrap -->
-	<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
-	<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap-theme.css">
 	<script src="bower_components/bootstrap-css/js/bootstrap.js"></script>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,10 +34,8 @@
 
 	<!-- angular chosen -->
 	<script src="modified_components/chosen.js"></script>
-	<link rel="stylesheet" href="bower_components/angular-chosen-localytics/chosen-spinner.css">
 
 	<!-- chart.js -->
-	<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
 	<script src="bower_components/Chart.js/Chart.min.js"></script>
 	<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 
@@ -41,10 +47,10 @@
 
 	<!-- angular busy -->
 	<script src="bower_components/angular-busy/dist/angular-busy.js"></script>
-	<link rel="stylesheet" href="modified_components/angular-busy.css" />
+	<!-- endbuild -->
 	
+	<!-- build:js scripts/scripts.js -->
 	<!-- my stuff -->
-	<link rel="stylesheet" href="styles/main.css" />
 	<script src="scripts/app.js"></script>
 	<script src="scripts/appstate.js"></script>
 	<script src="scripts/appdefaults.js"></script>
@@ -55,7 +61,7 @@
 	<script src="scripts/FooterController.js"></script>
 	<script src="scripts/ExploreController.js"></script>
 	<script src="scripts/dataProcessor.js"></script>
-
+	<!-- endbuild -->
 </head>
 
 <body>

@@ -1,10 +1,16 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var useref = require('gulp-useref');
+var gulpif = require('gulp-if');
+var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
+var removeHtmlComments = require('gulp-remove-html-comments');
+var httpServer = require('http-server');
 
 var corsProxy = function() {
-	var host = process.env.PORT ? '0.0.0.0' : '127.0.0.1';
-	var port = process.env.PORT || 8080;
+	var host = '0.0.0.0';
+	var port = 8080;
 
 	var cors_proxy = require('cors-anywhere');
 	cors_proxy.createServer({
@@ -16,6 +22,14 @@ var corsProxy = function() {
 
 gulp.task('serve', function() {
 	corsProxy();
+	var server = httpServer.createServer({
+		root: 'dist/',
+	});
+	server.listen(8000);	
+});
+
+gulp.task('serve-dev', function() {
+	corsProxy();
 	browserSync({
 		server: {
 			baseDir: 'app'
@@ -24,3 +38,27 @@ gulp.task('serve', function() {
 	
 	//gulp.watch(['*.html', 'styles/**/*.css', 'scripts/**/*.js'], {cwd: 'app'}, reload);
 });
+
+gulp.task('compile', function() {
+	var assets = useref.assets();
+
+	return gulp.src('app/*.html')
+		.pipe(assets)
+		.pipe(gulpif('*.css', minifyCss()))
+		.pipe(assets.restore())
+		.pipe(useref())
+		.pipe(removeHtmlComments())
+		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('copy-visuals', function() {
+	return gulp.src('app/visuals/*')
+		.pipe(gulp.dest('dist/visuals/'));
+});
+
+gulp.task('copy-bower', function() {
+	return gulp.src(['app/bower_components/**/*'])
+		.pipe(gulp.dest('dist/bower_components'));
+});
+
+gulp.task('build', ['copy-visuals', 'compile', 'copy-bower']);

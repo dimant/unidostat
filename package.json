@@ -23,6 +23,7 @@
     "cors-anywhere": "^0.2.5",
     "corser": "^2.0.0",
     "ecstatic": "^1.0.0",
+    "forever": "^0.15.1",
     "http-proxy": "^1.11.2",
     "http-server": "^0.8.0",
     "union": "^0.4.4"

@@ -1,7 +1,6 @@
 (function () {
     var unidostat = function ($http, $log) {
-        //var url = "https://localhost:8080/stat.unido.org:443/rest";
-        var url = "https://www.discrete-pca.org:8123/rest";
+        var url = "https://stat.unido.org:443/rest"       
         var username, password;
         
         var getConfig = function () {
